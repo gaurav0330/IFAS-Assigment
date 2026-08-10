@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "IFAS",
+    "slug": "ifas-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/ifas_edutech_pvt_ltd_logo.jpg",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F6F7FB",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0B1220",
+        "foregroundImage": "./assets/ifas_edutech_pvt_ltd_logo.jpg"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.ifas.app"
+    },
+    "web": {
+      "favicon": "./assets/ifas_edutech_pvt_ltd_logo.jpg"
+    },
+    "plugins": [
+      "@react-native-community/datetimepicker"
+    ]
+  }
+}
