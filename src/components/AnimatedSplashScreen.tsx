@@ -1,8 +1,7 @@
-import React, { useRef, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import LottieView from 'lottie-react-native';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Logo from './Logo';
-import { colors, radius, spacing, typography } from '../theme/theme';
+import { colors, spacing, typography } from '../theme/theme';
 import * as SplashScreen from 'expo-splash-screen';
 
 interface Props {
@@ -10,38 +9,20 @@ interface Props {
 }
 
 export default function AnimatedSplashScreen({ onFinish }: Props) {
-  const animation = useRef<LottieView>(null);
-
   useEffect(() => {
-    // Hide the native splash screen as soon as our Lottie component mounts
-    SplashScreen.hideAsync().catch(() => {
-      // Ignore errors if it's already hidden
-    });
+    SplashScreen.hideAsync().catch(() => {});
 
-    const fallbackTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       onFinish();
-    }, 2800);
+    }, 1500);
 
-    return () => clearTimeout(fallbackTimer);
+    return () => clearTimeout(timer);
   }, [onFinish]);
 
   return (
     <View style={styles.container}>
-      {/* Top Brand Header */}
-      <View style={styles.brandCard}>
-        <Logo size="lg" />
-      </View>
-
-      {/* Center Lottie Animation — Person Ticking Checklist */}
-      <LottieView
-        ref={animation}
-        autoPlay
-        loop={false}
-        style={styles.animation}
-        source={require('../../assets/checklist.json')}
-        onAnimationFinish={onFinish}
-      />
-
+      <Logo size="lg" />
+      <ActivityIndicator color={colors.blue} size="large" style={{ marginTop: spacing.xl }} />
       <Text style={styles.tagline}>India's #1 Competitive Exam Prep Platform</Text>
     </View>
   );
@@ -55,20 +36,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.paper,
     paddingHorizontal: spacing.lg,
   },
-  brandCard: {
-    alignItems: 'center',
-    marginBottom: spacing.md,
-  },
-  animation: {
-    width: 320,
-    height: 320,
-  },
   tagline: {
     ...typography.caption,
     color: colors.textSecondary,
     fontSize: 12,
     fontWeight: '600',
     textAlign: 'center',
-    marginTop: spacing.md,
+    marginTop: spacing.lg,
   },
 });
