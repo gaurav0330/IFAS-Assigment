@@ -202,50 +202,27 @@ function MainTabs() {
   );
 }
 
-import Logo from '../components/Logo';
+import AnimatedSplashScreen from '../components/AnimatedSplashScreen';
 
 export const navigationRef = createNavigationContainerRef<any>();
 
 export default function RootNavigator() {
-  // Wait for the persisted test session to rehydrate from AsyncStorage before
-  // deciding where to land the user. This is what makes a force-close resume
-  // land back on the Test (or Result) screen instead of always restarting at
-  // Profile.
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (useTestStore.persist.hasHydrated()) setHydrated(true);
-    }, 1200);
-
     const unsub = useTestStore.persist.onFinishHydration(() => {
-      setTimeout(() => setHydrated(true), 1000);
+      setHydrated(true);
     });
 
-    return () => {
-      clearTimeout(timer);
-      unsub();
-    };
+    if (useTestStore.persist.hasHydrated()) {
+      setHydrated(true);
+    }
+
+    return unsub;
   }, []);
 
   if (!hydrated) {
-    return (
-      <View style={loadingStyles.container}>
-        <LinearGradient
-          colors={[colors.ink, colors.blueDeep]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={loadingStyles.gradient}
-        >
-          <View style={loadingStyles.card}>
-            <Logo size="lg" />
-            <ActivityIndicator color={colors.orange} size="large" style={{ marginTop: 28 }} />
-            <Text style={loadingStyles.loadingTitle}>Loading IFAS Portal...</Text>
-            <Text style={loadingStyles.text}>India's #1 Competitive Exam Prep Platform</Text>
-          </View>
-        </LinearGradient>
-      </View>
-    );
+    return <AnimatedSplashScreen onFinish={() => setHydrated(true)} />;
   }
 
   return (

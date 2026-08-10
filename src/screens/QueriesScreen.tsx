@@ -37,7 +37,7 @@ export default function QueriesScreen() {
 
   const sendAutoReply = (userQuery: string) => {
     const queryLower = userQuery.toLowerCase();
-    let replyText = "Thank you for reaching out! An IFAS academic advisor will assist you shortly.";
+    let replyText = "Thank you for reaching out! An academic advisor will assist you shortly.";
 
     if (queryLower.includes('purchase') || queryLower.includes('buy') || queryLower.includes('price') || queryLower.includes('cost')) {
       replyText = `Special offer! The ${examName} All-India Test Series is available at 20% off. Includes 60+ full length tests & detailed solutions.`;
@@ -201,7 +201,7 @@ export default function QueriesScreen() {
 
         <Pressable
           style={({ pressed }) => [styles.optionCard, pressed && styles.optionCardPressed]}
-          onPress={() => startTopicChat(`I want to chat with an IFAS representative regarding ${examName}.`)}
+          onPress={() => startTopicChat(`I want to chat with a representative regarding ${examName}.`)}
         >
           <View style={styles.optionIconWrapOrange}>
             <Ionicons name="chatbubbles" size={18} color={colors.orangeDeep} />

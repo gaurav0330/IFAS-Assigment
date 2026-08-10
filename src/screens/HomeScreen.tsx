@@ -318,7 +318,7 @@ export default function HomeScreen({ navigation }: any) {
           />
           <NoticeCard
             icon={<Ionicons name="ribbon-outline" size={18} color={colors.blue} />}
-            title="IFAS All-India Mock Test Ranklist"
+            title="All-India Mock Test Ranklist"
             body="Ranklists declared! Check your percentile and top scores."
             time="1d ago"
           />
